@@ -74,3 +74,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 export NODE_OPTIONS=--openssl-legacy-provider
 unset NODE_OPTIONS
+v16.10.0
+yarn add @walletconnect/auth-client
+yarn add @walletconnect/qrcode-modal
