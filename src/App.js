@@ -1,17 +1,17 @@
-//import Web3 from "web3";
 import { useState } from "react";
 import "./App.css";
 import ConnectMetaMaskButton from "./components/ConnectMetaMaskButton";
+import FileUploader from "./components/FileUploader";
 
 const App = () => {
-  const [loading, setLoading] = useState(false);
   const [address, setAddress] = useState("");
 
   return(
     <div className="app">
       <div className="login-box">
         <div className="connect-wallet-button">
-          <ConnectMetaMaskButton loading={loading} setLoading={setLoading} address={address} setAddress={setAddress} />
+          <ConnectMetaMaskButton address={address} setAddress={setAddress}/>
+          {address && <FileUploader />}
         </div>
       </div>
     </div>

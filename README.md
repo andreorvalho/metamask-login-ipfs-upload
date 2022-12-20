@@ -1,3 +1,21 @@
+# SETUP
+
+1. install and update brew: ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" && brew update 
+2. install nvm: brew install nvm 
+3. install node: nvm install 16.10.0
+4. use nvm
+5. install yarn: npm install --global yarn
+6. run yarn to install modules: yarn install
+7. run application: yarn start
+
+### notes
+
+when seeing a node error:
+export NODE_OPTIONS=--openssl-legacy-provider
+
+to remove when node options not allowed
+unset NODE_OPTIONS
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -70,10 +88,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 
-### notes
-
-export NODE_OPTIONS=--openssl-legacy-provider
-unset NODE_OPTIONS
-v16.10.0
-yarn add @walletconnect/auth-client
-yarn add @walletconnect/qrcode-modal

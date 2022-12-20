@@ -17,11 +17,3 @@
 .connect-wallet-loading {
   cursor: none;
 }
-
-.image-container {
-  display: inline-block;
-}
-
-.image {
-  width: 50%;
-}

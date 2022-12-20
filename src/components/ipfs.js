@@ -6,7 +6,7 @@ const projectId = '2IJcpEv46U69D3bXWuO7qWB5F2q';
 const projectSecret = '8913add21c3e157cb0edcaf9fe3286a0';  
 const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
 
-const ipfs = create({ 
+const Ipfs = create({ 
   host: 'ipfs.infura.io',
   port: 5001,
   protocol: 'https',
@@ -15,4 +15,4 @@ const ipfs = create({
   }
 });
 
-export default ipfs;
+export default Ipfs;
