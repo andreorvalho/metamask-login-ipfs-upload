@@ -23,7 +23,6 @@ const FileUploader = () => {
         }
       )
 
-      console.log(added.cid.toString());
       setIpfsHash(added.cid.toString());
     } catch (err) {
       console.log(err.message);
@@ -42,7 +41,6 @@ const FileUploader = () => {
     reader.readAsArrayBuffer(file);
     reader.onloadend = () => {
       setFile(Buffer(reader.result));
-      console.log('set file');
     };
   };
 
