@@ -1,3 +1,6 @@
+import { useState, useEffect } from "react";
+import ipfs from './ipfs.js'
+import { Buffer } from 'buffer';
 import Web3 from "web3";
 import styles from "../styles/ConnectMetaMaskButton.module.css";
 
@@ -7,6 +10,10 @@ const ConnectMetaMaskButton = ({
   setLoading,
   setAddress,
 }) => {
+  const [file, setFile] = useState();
+  const [ipfsHash, setIpfsHash] = useState();
+  const [imageSource, setimageSource] = useState('');
+
   const onPressConnect = async () => {
     setLoading(true);
   
@@ -29,6 +36,44 @@ const ConnectMetaMaskButton = ({
   
   const onPressLogout = () => setAddress("");
 
+  useEffect(() => {
+    if(ipfsHash) {
+      setimageSource(`https://tryout.infura-ipfs.io/ipfs/${ipfsHash}`);
+    }
+  }, [ipfsHash]);
+
+  const saveToIpfs = async (givenFile) => {
+    try {
+      const added = await ipfs.add(
+        givenFile,
+        {
+          progress: (prog) => console.log(`received: ${prog}`)
+        }
+      )
+
+      console.log(added.cid.toString());
+      setIpfsHash(added.cid.toString());
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+  const onSubmit = (e) => { 
+    e.preventDefault();
+    saveToIpfs(file)
+  };
+  
+  const captureFile = (e) => { 
+    e.preventDefault();
+    const file = e.target.files[0];
+    const reader = new window.FileReader();
+    reader.readAsArrayBuffer(file);
+    reader.onloadend = () => {
+      setFile(Buffer(reader.result));
+      console.log('set file');
+    };
+  };
+
 
   if (loading) {
     return (
@@ -44,11 +89,21 @@ const ConnectMetaMaskButton = ({
   }
 
   if (address) {
-    <div>
-      <button onClick={onPressLogout} className={styles["connect-wallet"]}>
-        Disconnect
-      </button>
-    </div>
+    return (
+      <div>
+        <button onClick={onPressLogout} className={styles["connect-wallet"]}>
+          Disconnect
+        </button>
+        <div className={styles["image-container"]}>
+          <img className={styles["image"]} src={imageSource} alt="" />
+        </div>
+        
+        <form onSubmit={onSubmit}>
+          <input type="file" onChange={captureFile}/>
+          <input type="submit" />
+        </form>
+      </div>
+    );
   }
 
   return (
