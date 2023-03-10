@@ -3,14 +3,14 @@ import Ipfs from './Ipfs.js'
 import { Buffer } from 'buffer';
 import styles from "../styles/FileUploader.module.css";
 
-const FileUploader = () => { 
+const FileUploader = () => {
   const [file, setFile] = useState();
   const [ipfsHash, setIpfsHash] = useState();
   const [imageSource, setimageSource] = useState('');
 
   useEffect(() => {
     if(ipfsHash) {
-      setimageSource(`https://tryout.infura-ipfs.io/ipfs/${ipfsHash}`);
+      setimageSource(`https://${process.env.REACT_APP_PROJECT_DEDICATED_URL}/ipfs/${ipfsHash}`);
     }
   }, [ipfsHash]);
 
@@ -29,12 +29,12 @@ const FileUploader = () => {
     }
   }
 
-  const onSubmit = (e) => { 
+  const onSubmit = (e) => {
     e.preventDefault();
     saveToIpfs(file)
   };
-  
-  const captureFile = (e) => { 
+
+  const captureFile = (e) => {
     e.preventDefault();
     const file = e.target.files[0];
     const reader = new window.FileReader();
